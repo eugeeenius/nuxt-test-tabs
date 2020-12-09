@@ -13,16 +13,19 @@
           <div class="range-row">
             Диапазон 1
             <div>
-              от <input v-model="option.firstRange[0]" type="text" /> до
-              <input v-model="option.firstRange[1]" type="text" />
+              от
+              <input @change="updateFirstRangeFrom" type="number" required /> до
+              <input @change="updateFirstRangeTo" type="number" required />
             </div>
           </div>
           <div class="range-row">
             <span class="or">или</span>
             Диапазон 2
             <div>
-              от <input v-model="option.secondRange[0]" type="text" /> до
-              <input v-model="option.secondRange[1]" type="text" />
+              от
+              <input @change="updateSecondRangeFrom" type="number" required />
+              до
+              <input @change="updateSecondRangeTo" type="number" required />
             </div>
           </div>
         </div>
@@ -36,30 +39,25 @@
 </template>
 
 <script>
-import AddBtn from "@/components/buttons/AddBtn.vue";
-import DeleteBtn from "@/components/buttons/DeleteBtn.vue";
-
 export default {
   props: {
     title: { type: String, required: true },
-    submitForm: { type: Function, required: true },
   },
-  data() {
-    return {
-      option: {
-        id: 1,
-        firstRange: [],
-        secondRange: [],
-      },
-    };
-  },
+
+  // Все методы – это хендлеры инпутов
   methods: {
-    getInputText() {
-      submitForm(this.option);
+    updateFirstRangeFrom(e) {
+      this.$store.commit("updateFirstRangeFrom", e.target.value);
     },
-  },
-  mounted() {
-    this.getInputText();
+    updateFirstRangeTo(e) {
+      this.$store.commit("updateFirstRangeTo", e.target.value);
+    },
+    updateSecondRangeFrom(e) {
+      this.$store.commit("updateSecondRangeFrom", e.target.value);
+    },
+    updateSecondRangeTo(e) {
+      this.$store.commit("updateSecondRangeTo", e.target.value);
+    },
   },
 };
 </script>

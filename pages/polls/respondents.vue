@@ -74,28 +74,35 @@ export default {
   components: { Tabs, FormAge },
 
   methods: {
-    async submitForm(age) {
-      let request = [];
-      let data = await this.options.map((el) => {
+    // Функция собирает все данные с инпутов и отправляет на сервер
+    async submitForm() {
+      // Добавляем данные 1 формы
+      let formData = [this.$store.state.option];
+
+      // Добавляем данные 2 и 3 формы
+      let dropDownData = await this.options.map((el) => {
         const { id, type, status } = el;
+
+        // Проверяем, чтобы на формах были выбраны два инпута
         if (status) {
-          request = [...request, { id, type, status }];
+          formData = [...formData, { id, type, status }];
         }
-        return request;
+        return formData;
       });
 
+      // Отправляем данные на сервер
       await axios
         .post(
           "https://nuxt-form-34914-default-rtdb.firebaseio.com/data.json",
-          data
+          formData
         )
         .then((response) => {
           return "";
         });
+      // Обнуляем значения в store
+      this.$store.commit("clearOption");
     },
   },
-
-  async mounted() {},
 };
 </script>
 

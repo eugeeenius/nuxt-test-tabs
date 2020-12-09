@@ -30,9 +30,6 @@
 </template>
 
 <script>
-import AddBtn from "@/components/buttons/AddBtn.vue";
-import DeleteBtn from "@/components/buttons/DeleteBtn.vue";
-
 export default {
   props: {
     option: { type: Object, required: true },
