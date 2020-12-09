@@ -25,8 +25,10 @@
 
       <section id="next">
         <div class="btn-wrapper">
-          <button class="test-btn">Протестировать опрос</button>
-          <button class="next-btn">Далее &rarr;</button>
+          <button @click="submitForm" class="test-btn">
+            Протестировать опрос
+          </button>
+          <button @click="submitForm" class="next-btn">Далее &rarr;</button>
         </div>
       </section>
     </div>
@@ -39,34 +41,48 @@ import FormAge from "@/components/forms/FormAge.vue";
 export default {
   data() {
     return {
+      data: [],
       options: [
         {
-          number: "2",
-          first: "Тип карты лояльности",
-          second: "Gold",
+          id: 2,
+          type: "Тип карты лояльности",
+          status: "Gold",
           btn: "Добавить тип",
           sectionId: "second",
           color: "rgb(41	74	160)",
         },
         {
-          number: "3",
-          first: "Статус карты лояльности",
-          second: "Активна",
+          id: 3,
+          type: "Статус карты лояльности",
+          status: "Активна",
           btn: "Добавить статус",
           sectionId: "third",
           color: "rgb(101	152	0)",
         },
         {
-          number: "4",
-          first: "Выберите условие",
-          second: null,
+          id: 4,
+          type: "Выберите условие",
+          status: null,
           sectionId: "choose",
           btn: null,
         },
       ],
     };
   },
+
   components: { Tabs, FormAge },
+
+  methods: {
+    submitForm() {
+      this.options.forEach((el) => {
+        const { id, type, status } = el;
+        if (status) {
+          this.data = [...this.data, { id, type, status }];
+        }
+      });
+      console.log(this.data);
+    },
+  },
 };
 </script>
 

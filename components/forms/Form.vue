@@ -7,21 +7,21 @@
     <div class="conditions">
       <div class="conditions-age">
         <div class="select">
-          <h4 :style="{ color: option.color }">Условие {{ option.number }}</h4>
+          <h4 :style="{ color: option.color }">Условие {{ option.id }}</h4>
           <select>
-            <option>{{ option.first }}</option>
+            <option>{{ option.type }}</option>
           </select>
         </div>
-        <div v-if="option.second" class="select short">
+        <div v-if="option.status" class="select short">
           <select>
-            <option>{{ option.second }}</option>
+            <option>{{ option.status }}</option>
           </select>
         </div>
       </div>
     </div>
 
     <div class="btn-wrapper">
-      <button class="add-btn" :class="[option.second ? '' : 'hide']">
+      <button class="add-btn" :class="[option.status ? '' : 'hide']">
         {{ option.btn }}
       </button>
       <button class="delete-btn">Удалить условие</button>
@@ -34,6 +34,11 @@ import AddBtn from "@/components/buttons/AddBtn.vue";
 import DeleteBtn from "@/components/buttons/DeleteBtn.vue";
 
 export default {
+  data() {
+    return {
+      conditions: [],
+    };
+  },
   props: {
     option: { type: Object, required: true },
   },
