@@ -8,7 +8,7 @@
   </div>
 </template>
 
-<style>
+<style lang="scss">
 html {
   font-family: "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI",
     Roboto, "Helvetica Neue", Arial, sans-serif;
@@ -29,7 +29,6 @@ html {
 }
 
 main {
-  margin: 10rem 0 0 14rem;
-  width: 80vw;
+  margin: 10rem 5.5rem 10rem 14rem;
 }
 </style>
