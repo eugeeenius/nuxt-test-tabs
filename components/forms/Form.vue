@@ -7,7 +7,7 @@
     <div class="conditions">
       <div class="conditions-age">
         <div class="select">
-          <h4 :style="{ color: option.color }">Условие {{ option.id }}</h4>
+          <h4 :style="{ color: option.color }">Условие{{ option.id }}</h4>
           <select>
             <option>{{ option.type }}</option>
           </select>
@@ -34,11 +34,6 @@ import AddBtn from "@/components/buttons/AddBtn.vue";
 import DeleteBtn from "@/components/buttons/DeleteBtn.vue";
 
 export default {
-  data() {
-    return {
-      conditions: [],
-    };
-  },
   props: {
     option: { type: Object, required: true },
   },

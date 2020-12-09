@@ -12,12 +12,18 @@
         <div class="range">
           <div class="range-row">
             Диапазон 1
-            <div>от <input type="text" /> до <input type="text" /></div>
+            <div>
+              от <input v-model="option.firstRange[0]" type="text" /> до
+              <input v-model="option.firstRange[1]" type="text" />
+            </div>
           </div>
           <div class="range-row">
             <span class="or">или</span>
             Диапазон 2
-            <div>от <input type="text" /> до <input type="text" /></div>
+            <div>
+              от <input v-model="option.secondRange[0]" type="text" /> до
+              <input v-model="option.secondRange[1]" type="text" />
+            </div>
           </div>
         </div>
       </div>
@@ -36,15 +42,24 @@ import DeleteBtn from "@/components/buttons/DeleteBtn.vue";
 export default {
   props: {
     title: { type: String, required: true },
+    submitForm: { type: Function, required: true },
   },
   data() {
     return {
-      titles: ["Добавить диапазон"],
+      option: {
+        id: 1,
+        firstRange: [],
+        secondRange: [],
+      },
     };
   },
-  comments: {
-    AddBtn,
-    DeleteBtn,
+  methods: {
+    getInputText() {
+      submitForm(this.option);
+    },
+  },
+  mounted() {
+    this.getInputText();
   },
 };
 </script>

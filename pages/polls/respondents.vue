@@ -38,10 +38,11 @@
 <script>
 import Tabs from "@/components/Tabs.vue";
 import FormAge from "@/components/forms/FormAge.vue";
+import axios from "axios";
+
 export default {
   data() {
     return {
-      data: [],
       options: [
         {
           id: 2,
@@ -73,16 +74,28 @@ export default {
   components: { Tabs, FormAge },
 
   methods: {
-    submitForm() {
-      this.options.forEach((el) => {
+    async submitForm(age) {
+      let request = [];
+      let data = await this.options.map((el) => {
         const { id, type, status } = el;
         if (status) {
-          this.data = [...this.data, { id, type, status }];
+          request = [...request, { id, type, status }];
         }
+        return request;
       });
-      console.log(this.data);
+
+      await axios
+        .post(
+          "https://nuxt-form-34914-default-rtdb.firebaseio.com/data.json",
+          data
+        )
+        .then((response) => {
+          return "";
+        });
     },
   },
+
+  async mounted() {},
 };
 </script>
 
